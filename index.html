@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard กีฬาสี 2567 กฟฉ.1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1920x1080/?soccer,stadium') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+        }
+        .scoreboard {
+            width: 80%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background: #3b5998;
+            color: #ffffff;
+            padding: 10px 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+        .team h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .score {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons button.increment {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+        .buttons button.decrement {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        .status {
+            background: #6c757d;
+            color: #ffffff;
+            padding: 10px 0;
+        }
+        .timer {
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        function updateScore(team, increment) {
+            const scoreElement = document.getElementById(`score-${team}`);
+            let currentScore = parseInt(scoreElement.textContent);
+            currentScore = increment ? currentScore + 1 : Math.max(currentScore - 1, 0);
+            scoreElement.textContent = currentScore;
+        }
+    </script>
+</head>
+<body>
+    <div class="scoreboard">
+        <div class="header">
+            <h1>กีฬาสี 2567 กฟฉ.1 - ฟุตบอล</h1>
+        </div>
+        <div class="teams">
+            <div class="team" id="team-home">
+                <h2>ทีม A</h2>
+                <div class="score" id="score-home">0</div>
+                <div class="buttons">
+                    <button class="increment" onclick="updateScore('home', true)">+1</button>
+                    <button class="decrement" onclick="updateScore('home', false)">-1</button>
+                </div>
+            </div>
+            <div class="team" id="team-away">
+                <h2>ทีม B</h2>
+                <div class="score" id="score-away">0</div>
+                <div class="buttons">
+                    <button class="increment" onclick="updateScore('away', true)">+1</button>
+                    <button class="decrement" onclick="updateScore('away', false)">-1</button>
+                </div>
+            </div>
+        </div>
+        <div class="status">
+            <div class="timer" id="game-timer">เวลา: 00:00</div>
+            <div class="game-status" id="game-status">สถานะ: กำลังแข่งขัน</div>
+        </div>
+    </div>
+</body>
+</html>
